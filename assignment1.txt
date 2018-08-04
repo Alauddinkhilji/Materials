@@ -1,0 +1,24 @@
+create or replace procedure data1(deptt number) 
+is
+	name new_dept_table.name%type;
+	hod new_dept_table.hod%type;
+	dep new_dept_table.dept%type;
+	flag number := 0;
+	cursor cur is select dep,name,hod from new_dept_table where dept=deptt;
+	begin
+		open cur;
+		loop
+			fetch cur into dep,name,hod;
+			exit when cur%notfound;
+			if cur%rowcount>0 then
+				flag := 1;
+					if name ='BI' then
+						dbms_output.put_line(deptt || chr(9) || name || chr(9) || hod);
+					end if;
+			end if;
+		end loop;
+	close cur;
+			if flag=0 then
+				dbms_output.put_line('No record found');
+			end if;
+	end;

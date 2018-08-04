@@ -1,0 +1,11 @@
+ select dept_code,sum(staff_sal) as sumsal from staff_masters group by cube
+ (dept_CODE) ORDER BY DEPT_CODE ASC;
+
+select dept_code,sum(staff_sal) as sumsal from staff_masters group by rollup (dept_code)
+ORDER BY DEPT_CODE ASC;
+
+ select dept_code,sum(staff_sal) as sumsal from staff_masters group by rollup (dept_code,design_code)
+ ORDER BY DEPT_CODE ASC;
+
+select dept_code,sum(staff_sal) as sumsal from staff_masters group by cube (dept_code,design_code)
+ORDER BY DEPT_CODE ASC;

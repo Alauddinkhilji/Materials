@@ -1,0 +1,21 @@
+create or replace
+PROCEDURE get_new
+AS
+    CUST_ID varchar2(100);
+    ROUTERNAME_N VARCHAR2(100); 
+BEGIN
+    CURSOR c1 IS
+    SELECT TRAFFIC_CUST_ID,ROUTERNAME INTO CUST_ID,ROUTERNAME_N
+    FROM INTERFACE_ATTLAS
+    WHERE rownum > 3;
+
+    my_ename INTERFACE_ATTLAS.TRAFFIC_CUST_ID%TYPE;
+    my_salary INTERFACE_ATTLAS.ROUTERNAME%TYPE;
+
+    LOOP
+        FETCH c1 INTO my_ename;
+        FETCH c1 INTO my_salary;
+        EXIT WHEN c1%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(my_ename);
+    end loop;
+end;

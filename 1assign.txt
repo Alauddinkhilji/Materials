@@ -1,0 +1,47 @@
+DECLARE 
+   n_staff_code staff_masters.staff_code%type; 
+   n_staff_name staff_masters.staff_name%type; 
+   n_staff_sal  staff_masters.staff_sal%type; 
+   CURSOR staffdata IS
+   SELECT  staff_code, staff_name, staff_sal FROM staff_masters 
+   WHERE staff_code = '&staff_code';  
+   BEGIN
+   OPEN staffdata;
+   FETCH staffdata  INTO n_staff_code,n_staff_name,n_staff_sal;
+   WHILE staffdata%FOUND
+   LOOP
+   DBMS_OUTPUT.PUT_LINE ('Code: '||  n_staff_CODE); 
+   DBMS_OUTPUT.PUT_LINE ('Name: '||  n_staff_name); 
+   DBMS_OUTPUT.PUT_LINE ('Salary: ' || n_staff_sal);
+ FETCH staffdata INTO n_staff_code,n_staff_name,n_staff_sal; 
+   END LOOP;
+   CLOSE staffdata;
+EXCEPTION 
+   WHEN no_data_found THEN 
+      dbms_output.put_line('No such customer!'); 
+   WHEN others THEN 
+      dbms_output.put_line('Error!'); 
+END; 
+/
+
+
+create or replace procedure printEmps is
+cursor staffdata is 
+SELECT  staff_code, staff_name, staff_sal FROM staff_masters 
+WHERE staff_code = '&staff_code';  
+n_staff_code staff_masters.staff_code%type; 
+n_staff_name staff_masters.staff_name%type; 
+n_staff_sal  staff_masters.staff_sal%type; 
+begin
+open staffdata ;
+WHILE staffdata%FOUND
+loop
+FETCH staffdata  INTO n_staff_code,n_staff_name,n_staff_sal;
+exit when staffdata%NOTFOUND
+DBMS_OUTPUT.PUT_LINE ('Code: '||  n_staff_CODE); 
+DBMS_OUTPUT.PUT_LINE ('Name: '||  n_staff_name); 
+DBMS_OUTPUT.PUT_LINE ('Salary: ' || n_staff_sal);
+FETCH staffdata INTO n_staff_code,n_staff_name,n_staff_sal; 
+   END LOOP;
+   CLOSE staffdata;
+end;

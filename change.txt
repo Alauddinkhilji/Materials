@@ -1,0 +1,26 @@
+create or replace procedure data1(deptt number) 
+is
+	code staff_masters.dept_code
+	name staff_masters.staff_name%type;
+	hod staff_masters.staff_hod%type;
+	dep staff_masters.dept%type;
+	flag number := 0;
+	cursor c is select dep,name,hod from staff_masters 
+	where dept=deptt;
+	begin
+		open c;
+		loop
+			fetch c into dep,name,hod;
+			exit when c%notfound;
+			if c%rowcount>0 then
+				flag := 1;
+					if name ='BI' then
+						dbms_output.put_line(deptt || chr(9) || name || chr(9) || hod);
+					end if;
+			end if;
+		end loop;
+	close c;
+			if flag=0 then
+				dbms_output.put_line('No record found');
+			end if;
+	end;
