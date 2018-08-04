@@ -1,0 +1,70 @@
+DECLARE
+s_sal staff_masters.staff_sal%type;
+4)
+a integer;
+db integer;
+CURSOR staff is
+	select min(staff_sal) from staff_masters where dept_code=db
+	group by dept_code;
+BEGIN
+db := &db;
+OPEN staff;
+LOOP
+FETCH staff into s_sal;
+EXIT WHEN staff%notfound;
+a :=s_sal+(0.3)*s_sal;
+if (a<5000) then
+s_sal :=a;
+else
+s_sal :=5000;
+END if;
+END LOOP;
+CLOSE staff;
+END;
+/
+
+5)
+DECLARE
+deptcode student_masters.dept_code%type;
+stucode student_masters.student_code%type;
+stuname student_masters.student_name%type;
+s1 student_marks.subject1;
+s2 student_marks.subject2;
+s3 student_marks.subject3;
+total integer;
+grade varchar2(1);
+dc
+
+CURSOR stu is
+	select Dept_code,Student_Code,Sudent_Name,Subject1,Subject2,Subject3
+	from student_masters natural join student_marks;
+BEGIN
+if ()
+OPEN stu;
+LOOP
+FETCH stu into deptcode,stucode,stuname,s1,s2,s3;
+EXIT WHEN staff%notfound;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

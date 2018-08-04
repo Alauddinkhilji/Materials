@@ -1,0 +1,42 @@
+package gan;
+import com.infor.A;
+import java.util.Scanner;
+public class B {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ente your ID: ");
+		int i=sc.nextInt();
+		System.out.println("Ente your Name: ");
+		String n = sc.next();
+		System.out.println("Ente your Age: ");
+		int a=sc.nextInt();
+		sc.close();
+		A c= new A(i,n,a);
+		c.show();
+		
+
+	}
+
+}
+
+
+package com.infor;
+
+public class A 
+{
+	int id;
+	String name;
+	int age;
+	
+	public A(int id, String name, int age)
+	{
+		this.id=id;
+		this.name=name;
+		this.age=age;
+	}
+	public void show()
+	{
+		System.out.println("ID: "+id+ "Name: "+name+" Age: "+age);    
+    }
+}

@@ -1,0 +1,37 @@
+class Account {
+  double balance;
+  boolean withdraw(double bal){
+    this.balance = this.balance - bal;
+    return true;
+  }
+}
+class SavingAccount extends Account {
+    final double minimumBalance=500;
+    SavingAccount(double balance) {
+        this.balance=balance;
+    }
+
+    boolean withdraw(double bal){
+        if((this.balance - bal)>=minimumBalance) {
+            this.balance = this.balance - bal;
+            return true;
+        }
+    return false;
+    }
+}
+
+class CurrentAccount extends Account {
+    double overdraftLimit=-2000;
+    
+    CurrentAccount(double balance) {
+    this.balance=balance;
+    }
+
+    boolean withdraw(double bal){
+    if(this.balance - bal>=-2000) {
+        this.balance = this.balance - bal;
+        return true;
+    }
+    return false;
+    }
+}
