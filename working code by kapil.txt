@@ -1,0 +1,26 @@
+create or replace procedure data1(code number)
+is
+	scode staff_masters.staff_code%type;
+	sname staff_masters.staff_name%type;
+	dname department_masters.dept_name%type;
+	dcode department_masters.dept_code%type;
+	cursor c is 
+	--select s.staff_code, s.staff_name,s.dept_code,d.dept_name from staff_masters s join department_masters d on s.dept_code=d.dept_code where d.dept_name='Electronics';
+select s.staff_code, s.staff_name,s.dept_code,d.dept_name from staff_masters s join department_masters d on s.dept_code=d.dept_code 
+where d.dept_code=code;
+--
+	begin
+		open c;
+fetch c into scode,sname,dcode,dname;
+		loop
+			
+			exit when c%notfound;
+			
+			dbms_output.put_line(dcode || CHR(9) || scode || CHR(9) || sname ||' '|| dname);
+					
+		
+			fetch c into scode,sname,dcode,dname;
+		end loop;
+	close c;
+			
+	end;
